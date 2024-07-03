@@ -1,13 +1,12 @@
 import React from 'react';
 
-const BookingRow = ({ booking }) => {
-    const { customerName, email, date, service, price, img } = booking;
+const BookingRow = ({ booking, handleDelete, handleConfirm }) => {
+    const { _id, date, service, price, img, status } = booking;
+
     return (
         <tr>
             <th>
-                <label>
-                    <input type="checkbox" className="checkbox" />
-                </label>
+                <button onClick={() => { handleDelete(_id) }} className='btn bg-red-400 text-white'>remove</button>
             </th>
             <td>
                 <div className="avatar">
@@ -23,9 +22,9 @@ const BookingRow = ({ booking }) => {
             <td>{date}</td>
             <td>${price}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                {status === "confirm" ? <span className='font-semibold text-green-600'>Confirmed</span> : <button onClick={() => handleConfirm(_id)} className="btn btn-ghost btn-xs">Confirm Now</button>}
             </th>
-        </tr>
+        </tr >
     );
 };
 
