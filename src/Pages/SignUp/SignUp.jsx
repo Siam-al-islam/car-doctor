@@ -1,9 +1,12 @@
 import { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../Providers/AuthProvider';
+import { ToastContainer, toast } from 'react-toastify';
 
 const SignUp = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const { createUser } = useContext(AuthContext);
 
@@ -17,6 +20,7 @@ const SignUp = () => {
 
         createUser(email, password)
             .then(result => {
+                toast.success("Signed Up... Welcome")
                 const user = result.user;
                 console.log(user)
             })
@@ -61,6 +65,7 @@ const SignUp = () => {
                         <h3 className='mt-3'>Already have an account? <Link to="/login" className=' text-orange-600 font-semibold'>Login</Link></h3>
                     </form>
                 </div>
+                <ToastContainer />
             </div>
         </div>
     );
